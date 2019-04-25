@@ -8,6 +8,7 @@ import {MoreLikeThisType} from "../configuring/MoreLikeThisType";
 
 interface MoreLikeThisSnippetListProps {
     snippetId: string,
+    docId: string,
     from: number,
     onAllSnippetsHaveAnswers: ((answers: Array<any>) => void)
 }
@@ -35,7 +36,7 @@ class MoreLikeThisSnippetList extends React.Component<MoreLikeThisSnippetListPro
     };
 
     private fetchFromES() {
-        Resources.getMoreLikeThisSnippetsFromES(this.props.snippetId, this.props.from, this.context.moreLikeThisSize).then((json) => {
+        Resources.getMoreLikeThisSnippetsFromES(this.props.snippetId, this.props.docId, this.props.from, this.context.moreLikeThisSize).then((json) => {
             this.setState({snippets: json});
         }).catch((data) => {
             this.setState({error: 'Could not fetch more like this snippets from elasticsearch.'});
